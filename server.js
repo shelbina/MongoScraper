@@ -1,82 +1,60 @@
 // Dependencies
 var express = require("express");
+var exphbs = require('express-handlebars');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 var mongojs = require("mongojs");
 // Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
+//Require for debugging
+var logger = require('morgan');
 
 // Initialize Express
+// Use morgan and body parser
 var app = express();
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 
-// Database configuration
-var databaseUrl = "scraper";
-var collections = ["scrapedData"];
+// Serve Static Content
+app.use(express.static(process.cwd() + '/public'));
 
-// Hook mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(error) {
-  console.log("Database Error:", error);
+// Express-Handlebars
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+// Database Configuration with Mongoose
+// Connect to localhost if not a production environment
+if(process.env.NODE_ENV == 'production'){
+  mongoose.connect('mongodb://heroku_r1mcc7hs:rkabgv3c54830uco5qhub8fpl0@ds149134.mlab.com:49134/heroku_r1mcc7hs');
+}
+else{
+  mongoose.connect('mongodb://localhost/newsscraper');
+}
+var db = mongoose.connection;
+
+// Show any Mongoose errors
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
 });
 
-// Main route (simple Hello World Message)
-app.get("/", function(req, res) {
-  res.send("Hello world");
+// Once logged in to the db through mongoose, log a success message
+db.once('open', function() {
+  console.log('Mongoose connection successful.');
 });
 
-// Retrieve data from the db
-app.get("/all", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.json(found);
-    }
-  });
-});
+// Import the Comment and Article models
+var Comment = require('./models/Comment.js');
+var Article = require('./models/Article.js');
 
-// Scrape data from one site and place it into the mongodb db
-app.get("/scrape", function(req, res) {
-  // Make a request for the news section of ycombinator
-  request("https://news.ycombinator.com/", function(error, response, html) {
-    // Load the html body from request into cheerio
-    var $ = cheerio.load(html);
-    // For each element with a "title" class
-    $(".title").each(function(i, element) {
-      // Save the text and href of each link enclosed in the current element
-      var title = $(element).children("a").text();
-      var link = $(element).children("a").attr("href");
+// Import Routes/Controller
+var router = require('./controllers/controller.js');
+app.use('/', router);
 
-      // If this found element had both a title and a link
-      if (title && link) {
-        // Insert the data in the scrapedData db
-        db.scrapedData.insert({
-          title: title,
-          link: link
-        },
-        function(err, inserted) {
-          if (err) {
-            // Log the error if one is encountered during the query
-            console.log(err);
-          }
-          else {
-            // Otherwise, log the inserted data
-            console.log(inserted);
-          }
-        });
-      }
-    });
-  });
-
-  // Send a "Scrape Complete" message to the browser
-  res.send("Scrape Complete");
-});
-
-
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+// Launch App
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('Running on port: ' + port);
 });
