@@ -3,7 +3,6 @@ var express = require("express");
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-// var mongojs = require("mongojs");
 var request = require("request");
 var cheerio = require("cheerio");
 //Require for debugging
@@ -30,7 +29,7 @@ if(process.env.NODE_ENV == 'production'){
   mongoose.connect('mongodb://heroku_r1mcc7hs:rkabgv3c54830uco5qhub8fpl0@ds149134.mlab.com:49134/heroku_r1mcc7hs');
 }
 else{
-  mongoose.connect('mongodb://localhost/newsscraper');
+  mongoose.connect('mongodb://localhost/mongoscraper');
 }
 var db = mongoose.connection;
 
@@ -45,8 +44,8 @@ db.once('open', function() {
 });
 
 // Import the Comment and Article models
-var Comment = require('./models/comment.js');
-var Article = require('./models/article.js');
+var comment = require('./models/comment.js');
+var article = require('./models/article.js');
 
 // Import Routes/Controller
 var router = require('./controllers/controller.js');

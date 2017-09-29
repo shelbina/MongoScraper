@@ -37,11 +37,11 @@ app.get('/', function (req, res){
         var $ = cheerio.load(html);
         // error handler for  duplicate articles
         var titlesArray = [];
-        $(".gs-c-promo-heading").each(function(i, element) {
+        $(".gs-c-promo").each(function(i, element) {
             var result = {};
-            result.title = $(this).children("h3").text().trim() + "";
+            result.title = $(this).children("h3").text();
             result.link = "http://www.bbc.com"+ $(this).children('h3').children('a').attr('href');
-            result.summary = $(this).children('div').text().trim() + "";
+            result.summary = $(this).children('div').text();
             if(result.title !== "" &&  result.summary !== ""){
     
               // filter duplicates within a scrape
@@ -60,17 +60,11 @@ app.get('/', function (req, res){
                     });
     
                   }
-                  else{
-                    console.log('Redundant Database Content. Not saved to DB.')
-                  }
                 });
             }
             else{
-              console.log('Redundant BBC Content. Not Saved to DB.')
+              console.log('Same BBC Content. Not Saved to DB.')
             }
-          }
-          else{
-            console.log('Empty Content. Not Saved to DB.')
           }
         });
         res.redirect("/articles");
