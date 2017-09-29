@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Tab Title -->
+    <title>MongoScraper</title>
+    <!-- View Port Size -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Materialize - Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!-- Materialize - Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../public/style/style.css">
+  </head>
+  <body class="indigo darken-3">
+  
+    <!-- Fixed Nav Bar -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper indigo accent-1">
+          <a href="/" class="brand-logo"><i class="material-icons">web</i>MongoScraper</a>
+          <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="http://www.bbc.com/news" target="_new">BBC News</a></li>
+            <li><a href="https://github.com/shelbina/MongoScraper" target="_new">Github Repository</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- For Mobile Nav Bar -->
+    <ul class="side-nav darken-3" id="mobile-demo">
+      <li><a href="http://www.bbc.com/news" target="_new">BBC News</a></li>
+      <li><a href="https://github.com/shelbina/MongoScraper" target="_new">Github Repository</a></li>
+    </ul>
+
+
+    <!-- Page Content -->
+    <main> 
+
+      <!-- Site Info Container -->
+      <div class="container header">
+        <h1>Welcome to MongoScraper!</h1>
+      </div>
+      <div class="container collection" style="background-color: white; text-align: center;">
+          <h4 class="collection-header">Skim, Save, and Comment on BBC News</h4>
+      </div>
+
+      <!-- Render All Articles -->
+      <div class="container">
+        {{{body}}}
+      </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="page-footer indigo accent-1">
+      <div class="footer-copyright">
+        <div class="container">
+        Articles scraped from:
+        <a class="grey-text text-lighten-4" href="http://www.bbc.com/news">BBC News</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Link in jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Materialize - Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <!-- Basic Page JavaScript for Repsonsiveness -->
+    <script type="text/javascript" src="../public/js/app.js"></script>
+    
+  </body>
+</html>
