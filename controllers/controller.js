@@ -40,7 +40,7 @@ app.get('/', function (req, res){
         $(".gs-c-promo-heading").each(function(i, element) {
             var result = {};
             result.title = $(this).children("h3").text().trim() + "";
-            result.link = "http://www.bbc.com"+ $(this).children('h3').children('a').attr('href').trim();
+            result.link = "http://www.bbc.com"+ $(this).children('h3').children('a').attr('href');
             result.summary = $(this).children('div').text().trim() + "";
             if(result.title !== "" &&  result.summary !== ""){
     

@@ -3,8 +3,7 @@ var express = require("express");
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var mongojs = require("mongojs");
-// Require request and cheerio. This makes the scraping possible
+// var mongojs = require("mongojs");
 var request = require("request");
 var cheerio = require("cheerio");
 //Require for debugging
@@ -46,8 +45,8 @@ db.once('open', function() {
 });
 
 // Import the Comment and Article models
-var Comment = require('./models/Comment.js');
-var Article = require('./models/Article.js');
+var Comment = require('./models/comment.js');
+var Article = require('./models/article.js');
 
 // Import Routes/Controller
 var router = require('./controllers/controller.js');
