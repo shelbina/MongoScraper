@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Tab Title -->
+    <title>MongoScraper</title>
+    <!-- View Port Size -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Materialize - Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!-- Materialize - Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../public/style/style.css">
+  </head>
+  <body class="indigo darken-3">
+  
+    <!-- Fixed Nav Bar -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper indigo accent-1">
+          <a href="" class="brand-logo"><i class="material-icons">web</i>MongoScraper</a>
+          <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">A</a></li>
+            <li><a href="#">B</a></li>
+            <li><a href="#">C</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+      
+    <!-- For Mobile Nav Bar -->
+    <ul class="side-nav" id="mobile-demo">
+      <li><a href="#">A</a></li>
+      <li><a href="#">B</a></li>
+      <li><a href="#">C</a></li>
+    </ul>
+  
+
+    <!-- Page Content -->
+    <main> 
+
+      <!-- Site Info Container -->
+      <div class="container header">
+        <h1>Welcome to MongoScraper!</h1>
+      </div>
+      <div class="container collection" style="background-color: white; text-align: center;">
+          <h4 class="collection-header">Skim, Save, and Comment on BBC News</h4>
+      </div>
+      <!-- Article Container... List all Articles Inside Here -->
+      <div class="container">
+
+        <!-- Article 1 -->
+        <ul class="collapsible" data-collapsible="accordion">
+
+          <!-- Article Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">language</i>Article Title</div>
+            <div class="collapsible-body" style="background-color: white;">
+              <p>
+                Article Summary and Reading!!!
+              </p>
+            </div>
+          </li>
+
+          <!-- Comment on Articles Form-->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">question_answer</i>Share Ideas</div>
+            <div class="collapsible-body" style="background-color: white;">
+
+              <form action="user/comment" method="post" style="background-color: white;">
+
+                <!-- Author Name Input -->
+                <div class="row">
+                  <div class="input-field col s2"></div>
+                  <div class="input-field col s8">
+                    <input id="author_name" type="text" class="validate">
+                    <label for="author_name">Your Name:</label>
+                  </div>
+                </div>
+                
+                <!-- Comment Input -->
+                <div class="row">
+                  <div class="input-field col s2"></div>
+                  <div class="input-field col s8">
+                    <textarea id="comment_box" class="materialize-textarea"></textarea>
+                    <label for="comment_box">Your Reaction:</label>
+                  </div>
+                </div>
+
+                  <!-- Submit Button -->
+                  <div class="row">
+                    <div class="input-field col s2"></div>
+                    <div class="input-field col s8">
+                    <center><input class="btn" type="submit" value="Submit"></center>
+                    </div>
+                  </div>
+                
+              </form>
+
+            </div>
+          </li>
+
+          <!-- View Comments Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">face</i>View Ideas</div>
+            <div class="collapsible-body" style="background-color: white;">
+
+                  
+              <!-- Comments  -->
+              <ul class="collection">
+
+                <li class="collection-item">
+                  Author 1 Name
+                  <br>
+                  Auther 1 Comment
+                </li>
+
+                <li class="collection-item">
+                  Author 2 Name
+                  <br>
+                  Auther 2 Comment
+                </li>
+
+                <li class="collection-item">
+                  Author 3 Name
+                  <br>
+                  Auther 3 Comment
+                </li>
+
+                <li class="collection-item">
+                  Author 4 Name
+                  <br>
+                  Auther 4 Comment
+                </li>
+
+              </ul>
+
+
+            </div>
+          </li>
+
+        </ul>
+        <!-- Article 2 -->
+        <ul class="collapsible" data-collapsible="accordion">
+          <!-- Article Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">language</i>Article Title</div>
+            <div class="collapsible-body" style="background-color: white;">
+              <p>
+                  Article Summary and Reading!!!
+              </p>
+            </div>
+          </li>
+          <!-- Comment on Articles Form-->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">question_answer</i>Share Ideas</div>
+            <div class="collapsible-body" style="background-color: white;"></div>
+          </li>
+          <!-- Comments Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">face</i>View Ideas</div>
+            <div class="collapsible-body" style="background-color: white;">
+              <p>
+                No Comments Yet
+              </p>
+            </div>
+          </li>
+        </ul>
+
+
+
+        <!-- Article 3 -->
+        <ul class="collapsible" data-collapsible="accordion">
+          <!-- Article Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">language</i>Article Title</div>
+            <div class="collapsible-body" style="background-color: white;">
+              <p>
+                Article Summary and Reading!!!
+              </p>
+            </div>
+          </li>
+          <!-- Comment on Articles Form-->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">question_answer</i>Share Ideas</div>
+            <div class="collapsible-body" style="background-color: white;"></div>
+          </li>
+          <!-- Comments Drop Down -->
+          <li>
+            <div class="collapsible-header"><i class="material-icons">face</i>View Ideas</div>
+            <div class="collapsible-body" style="background-color: white;">
+              <p>
+                No Comments Yet
+              </p>
+            </div>
+          </li>
+        </ul>
+
+
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="page-footer indigo accent-1">
+      <div class="footer-copyright">
+        <div class="container">
+        Articles scraped from: 
+        <a class="grey-text text-lighten-4" href="http://www.bbc.com/news">BBC News</a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../public/js/app.js"></script>
+  </body>
+</html>
