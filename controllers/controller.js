@@ -11,7 +11,6 @@ var Article = require('../models/article.js');
 
 // Index Page Render
 router.get('/', function (req, res){
-      // Scrape data
       res.redirect('/scrape');
     });
 

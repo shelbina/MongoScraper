@@ -4,7 +4,6 @@ $(document).ready(function(){
       $(".button-collapse").sideNav();
     
       $('.add-comment-button').on('click', function(){
-
         var articleId = $(this).data("id");
         var baseURL = window.location.origin;
         var frmName = "form-add-" + articleId;
@@ -22,7 +21,6 @@ $(document).ready(function(){
       });
     
       $('.delete-comment-button').on('click', function(){
-
         var commentId = $(this).data("id");
         var baseURL = window.location.origin;
         $.ajax({
