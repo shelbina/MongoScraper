@@ -1,24 +1,22 @@
-// Node Dependencies
+// Dependencies
 var express = require('express');
 var path = require('path');
-var request = require('request'); // for web-scraping
-var cheerio = require('cheerio'); // for web-scraping
-
-// Initialize Express
-var app = express();
+var request = require('request');
+var cheerio = require('cheerio');
+var router = express.Router();
 
 // Import the Comment and Article models
 var Comment = require('../models/comment.js');
 var Article = require('../models/article.js');
 
 // Index Page Render
-app.get('/', function (req, res){
+router.get('/', function (req, res){
       // Scrape data
       res.redirect('/scrape');
     });
 
     // Articles Page Render, Query MongoDB, load comments
-    app.get('/articles', function (req, res){
+    router.get('/articles', function (req, res){
       Article.find().sort({_id: -1})
         .populate('comments')
         .exec(function(err, doc){
@@ -32,7 +30,7 @@ app.get('/', function (req, res){
         });
     });
     // Web Scrape Route
-    app.get('/scrape', function(req, res) {
+    router.get('/scrape', function(req, res) {
       request('http://www.bbc.com/news', function(error, response, html) {
         var $ = cheerio.load(html);
         // error handler for  duplicate articles
@@ -71,7 +69,7 @@ app.get('/', function (req, res){
       });
     });
     // Add a Comment Route
-    app.post('/add/comment/:id', function (req, res){
+    router.post('/add/comment/:id', function (req, res){
       var articleId = req.params.id;
       var commentAuthor = req.body.name;
       var commentContent = req.body.comment;
@@ -97,7 +95,7 @@ app.get('/', function (req, res){
       });
     });
     // Delete a Comment Route
-    app.post('/remove/comment/:id', function (req, res){
+    router.post('/remove/comment/:id', function (req, res){
       var commentId = req.params.id;
       Comment.findByIdAndRemove(commentId, function (err, todo) {  
         if (err) {
@@ -109,4 +107,4 @@ app.get('/', function (req, res){
       });  
     });
     // Export Router to Server.js
-    module.exports = app;
+    module.exports = router;
