@@ -1,4 +1,3 @@
-var moment = require("moment");
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
@@ -14,16 +13,12 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
- updated: {
-    type: String,
-    default: moment().format('MMMM Do YYYY, h:mm A')
-  },
   comments: [{
     type: Schema.Types.ObjectId,
-    ref: 'Comment'
+    ref: 'comment'
   }]
 });
 
-var Article = mongoose.model('Article', ArticleSchema);
+var article = mongoose.model('article', ArticleSchema);
 
-module.exports = Article;
+module.exports = article;

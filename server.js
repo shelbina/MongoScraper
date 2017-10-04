@@ -44,8 +44,8 @@ db.once('open', function() {
 });
 
 // Import the Comment and Article models
-var Comment = require('./models/comment.js');
-var Article = require('./models/article.js');
+var comment = require('./models/comment.js');
+var article = require('./models/article.js');
 
 // Import Routes/Controller
 var router = require('./controllers/controller.js');

@@ -44,9 +44,9 @@ router.get('/', function (req, res){
               // filter duplicates within a scrape
               if(titlesArray.indexOf(result.title) == -1){
                 titlesArray.push(result.title);
-                Article.count({ title: result.title}, function (err, test){
+                article.count({ title: result.title}, function (err, test){
                    if(test == 0){
-                    var entry = new Article (result);
+                    var entry = new article (result);
                     entry.save(function(err, doc) {
                       if (err) {
                         console.log(err);
@@ -82,7 +82,7 @@ router.get('/', function (req, res){
           console.log(err);
         } 
         else {
-          Article.findOneAndUpdate({'_id': articleId}, {$push: {'comments':doc._id}}, {new: true})
+          article.findOneAndUpdate({'_id': articleId}, {$push: {'comments':doc._id}}, {new: true})
           .exec(function(err, doc){
             if (err){
               console.log(err);
