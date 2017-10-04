@@ -34,7 +34,7 @@ router.get('/', function (req, res){
         var $ = cheerio.load(html);
         // error handler for  duplicate articles
         var titlesArray = [];
-        $(".gs-c-promo").each(function(i, element) {
+        $(".gs-c-promo-heading").each(function(i, element) {
             var result = {};
             result.title = $(this).children("h3").text();
             result.link = "http://www.bbc.com"+ $(this).children('h3').children('a').attr('href');
