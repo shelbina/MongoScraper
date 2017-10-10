@@ -126,6 +126,9 @@ app.post("/comment/:id", function (req, res) {
 });
 
 //Connect to Port
+var uri = 'mongodb://localhost/heroku_r1mcc7hs';
+mongoose.createConnection(uri, { server: { poolSize: 4 }});
+
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
   console.log('Running on port: ' + port);
