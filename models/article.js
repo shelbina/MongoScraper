@@ -1,8 +1,10 @@
+//Dependencies
 var moment = require("moment");
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
 
+  //Schemas
   title: {
     type: String,
     required: true
@@ -15,8 +17,12 @@ var ArticleSchema = new Schema({
 
   summary: {
     type: String,
-    required: true
   },
+  
+  saved: {
+    type: Boolean,
+    default: false
+  },  
 
   updated: {
     type: String,

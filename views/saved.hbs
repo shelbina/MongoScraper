@@ -1,0 +1,53 @@
+<div class="container">
+  {{#if articles}}
+    {{#each articles}}
+    <div class="card card indigo accent-1">
+      <div class="card-content white-text">
+        <span class="card-title white-text">
+          <a href="{{this.link}}" target="_blank">{{this.title}}</a>
+        </span>
+        <p>{{this.summary}}</p>
+      </div>
+      <div class="card-action white-text text-accent-3">
+        <form method="POST" action="/save/saved/{{this._id}}">
+          {{#if this.comments}}
+          <a href="#modal{{this._id}}" class="btn modal-trigger indigo accent-2 white-text text-darken-3">{{this.comments.length}} Comments</a>
+          {{else}}
+          <a href="#modal{{this._id}}" class="btn modal-trigger indigo accent-2 white-text text-darken-3">Comment</a>
+          {{/if}}
+          <input type="hidden" name="saved" value="false">
+          <button type="submit" class="btn indigo accent-2 white-text text-darken-3">Unsave article</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal{{this._id}}" class="modal">
+      <a class="modal-close right"><i class="material-icons">close</i></a>
+      <div class="modal-content">
+        <h4>Comments:</h4>
+        {{#if this.comments.length}}
+        <ul class="collection">
+          {{#each this.comments}}
+          <li class="collection-item">{{this.body}}</li>
+          {{/each}}
+        </ul>
+        {{else}}
+        <p>Share an idea here.</p>
+        {{/if}}
+        <form method="POST" action="/comment/{{this._id}}">
+          <div class="input-field">
+            <textarea name="body" id="commentfield" class="materialize-textarea"></textarea>
+            <label for="commentfield">Your idea</label>
+            <button type="submit" class="btn indigo accent-2 white-text text-darken-3">submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  {{else}}
+    <div class="card-panel indigo darken-3 white-text">
+      <h2>No BBC News Saved</h2>
+      <p>No BBC News Saved <a href="/" class="indigo accent-2 white-text text-darken-3 waves-effect waves-light btn">home</a> and save some!</p>
+    </div>
+  {{/if}}
+</div>

@@ -1,86 +1,29 @@
-{{#each articles}}
-  <ul class="collapsible" data-collapsible="accordion">
-    <!-- Article Drop Down -->
-    <li>
-      <div style="background-color: white;" class="collapsible-header indigo accent-1">
-        <i class="material-icons">language</i> <b>{{updated}}</b>
-        <div style="clear: left; line-height: 110%; padding-bottom: 10px;"><b>{{title}}</b></div>
+<div class="container">
+  {{#if articles}}
+    {{#each articles}}
+    <div class="card indigo accent-1">
+      <div class="card-content white-text">
+        <span class="card-title white-text">
+          <a href="{{this.link}}" target="_blank">{{this.title}}</a>
+        </span>
+        <p>{{this.summary}}</p>
       </div>
-      <div class="collapsible-body" style="background-color: white;">
-        <p>
-          {{summary}}
-          <br><br>
-          <i>Explore BBC news article <a href="{{link}}" target="_new">here</a>.</i>
-        </p>
-      </div>
-    </li>
-    <!-- Add Comments Drop Down -->
-    <li>
-      <div class="collapsible-header"><i class="material-icons">question_answer</i>Share Ideas</div>
-      <div class="collapsible-body" style="background-color: white;">
-        <form id="form-add-{{_id}}" action="add/comment/{{_id}}" method="post" style="background-color: white;">
-          <!-- Author Name Input -->
-          <div class="row">
-            <div class="input-field col s2"></div>
-            <div class="input-field col s8">
-              <input id="author_name" name="name" type="text" class="validate">
-              <label for="author_name">Your Name:</label>
-            </div>
-          </div>
-          
-          <!-- Comment Input -->
-          <div class="row">
-            <div class="input-field col s2"></div>
-            <div class="input-field col s8">
-              <textarea id="comment_box" name="comment" class="materialize-textarea"></textarea>
-              <label for="comment_box">Your Idea:</label>
-            </div>
-          </div>
-
-            <!-- Submit Button -->
-            <div class="row">
-              <div class="input-field col s2"></div>
-              <div class="input-field col s8">
-              <center><input class="btn add-comment-button" data-id="{{_id}}" type="submit" value="Submit"></center>
-              </div>
-            </div>
-          
-        </form>
-
-      </div>
-    </li>
-
-    <!-- View Comments Drop Down -->
-    <li>
-      <div class="collapsible-header"><i class="material-icons">face</i>View Ideas</div>
-      <div class="collapsible-body" style="background-color: white;">
-        {{!-- Check for comments --}}
-        {{#if comments}}
-          {{!-- display comments  --}}
-          <ul class="collection">
-            {{#each comments}}
-              <li class="collection-item">
-                {{!-- Add Author Name --}}
-                <b>{{author}}</b> 
-                {{!-- Add a Delete Button --}}
-                <span class="badge">
-                  <form id="form-delete-{{_id}}" action="remove/comment/{{_id}}" method="post">
-                    <input class="btn-small delete-comment-button" data-id="{{_id}}" type="submit" value="Delete" style="color: white; background-color: indigo accent-1; border-color:indigo darken-3;">
-                  </form>
-                </span>
-                <br>
-                {{!-- Add the Content of the Comment --}}
-                {{content}}
-              </li> 
-            {{/each}}
-          </ul>
-        {{!-- No comments, so display message --}}
+      <div class="card-action indigo accent-1">
+        {{#if this.saved}}
+        <a href="#" class="btn disabled blue accent-1 white-text">article saved</a> 
         {{else}}
-          <p>No Ideas Shared</p>
+        <form method="POST" action="/save/index/{{this._id}}">
+          <input type="hidden" name="saved" value="true">
+          <button type="submit" class="btn blue accent-1 white-text">save article</button>
+        </form>
         {{/if}}
-            
       </div>
-    </li>
-
-  </ul>
-{{/each}}
+    </div>
+    {{/each}}
+  {{else}}
+    <div class="card-panel blue-grey darken-3 white-text">
+      <h2>Please Scrape and Save</h2>
+      <p>Scrape and save a BBC article to read. <a href="/scrape" class="blue accent-1 white-text text-darken-3">Scrape Here!</a></p>
+    </div>
+  {{/if}}
+</div>
